@@ -7,6 +7,18 @@ import { revalidatePath } from 'next/cache';
 import { CustomerProduct } from './definitions';
 import { redirect } from 'next/navigation';
 
+import { auth } from '@clerk/nextjs/server';
+
+async function requireAuthenticatedUser() {
+  const { isAuthenticated, userId } = await auth();
+
+  if (!isAuthenticated || !userId) {
+    throw new Error('Unauthorized');
+  }
+
+  return userId;
+}
+
 const CustomerCreationSchema = z.object({
   code: z
     .string({
@@ -131,6 +143,8 @@ function buildProductEntriesFromFields(
 export async function createCustomer(
   formData: FormData
 ): Promise<ActionResult> {
+  await requireAuthenticatedUser();
+
   const validationResult = CustomerCreationSchema.safeParse({
     code: formData.get('code'),
     products: JSON.parse(formData.get('products') as string),
@@ -185,6 +199,8 @@ export async function updateCustomer(
   originalCode: string,
   formData: FormData
 ): Promise<ActionResult> {
+  await requireAuthenticatedUser();
+
   const validationResult = CustomerCreationSchema.safeParse({
     code: formData.get('code'),
     products: JSON.parse(formData.get('products') as string),
@@ -249,6 +265,8 @@ export async function updateCustomerFromFields(
 }
 
 export async function deleteCustomer(code: string) {
+  await requireAuthenticatedUser();
+
   try {
     const connectionResolved = getPool();
     await connectionResolved.query('DELETE FROM customers WHERE codigo = ?;', [
@@ -303,6 +321,8 @@ const ProductCreationSchema = z.object({
 });
 
 export async function createProduct(formData: FormData): Promise<ActionResult> {
+  await requireAuthenticatedUser();
+
   const validationResult = ProductCreationSchema.safeParse({
     name: formData.get('name'),
     capitalCalls: JSON.parse(formData.get('capitalCalls') as string),
@@ -369,6 +389,8 @@ export async function updateProduct(
   originalName: string,
   formData: FormData
 ): Promise<ActionResult> {
+  await requireAuthenticatedUser();
+
   const validationResult = ProductCreationSchema.safeParse({
     name: formData.get('name'),
     capitalCalls: JSON.parse(formData.get('capitalCalls') as string),
@@ -404,7 +426,9 @@ export async function updateProduct(
       for (const customer of customerRows) {
         const products = JSON.parse((customer.products as string) || '[]');
         const updatedProducts = products.map((product: CustomerProduct) =>
-          product.name === originalName ? { ...product, name: nextName } : product
+          product.name === originalName
+            ? { ...product, name: nextName }
+            : product
         );
 
         if (JSON.stringify(updatedProducts) !== JSON.stringify(products)) {
@@ -460,9 +484,13 @@ export async function updateProductFromFields(
 }
 
 export async function deleteProduct(name: string) {
+  await requireAuthenticatedUser();
+
   try {
     const connectionResolved = getPool();
-    await connectionResolved.query('DELETE FROM products WHERE name = ?;', [name]);
+    await connectionResolved.query('DELETE FROM products WHERE name = ?;', [
+      name,
+    ]);
 
     const [customerRows] = await connectionResolved.query<any[]>(
       'SELECT codigo, products FROM customers'

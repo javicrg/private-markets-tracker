@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { ClerkProvider } from '@clerk/nextjs';
 
 import { Toaster } from '@/app/ui/shadcn/ui/toaster';
 import ThemeScript from '@/app/ui/theme/theme-script';
@@ -23,8 +24,7 @@ export default function RootLayout({
         <ThemeScript />
       </head>
       <body className="antialiased transition-colors">
-        {children}
-        <Toaster />
+        <ClerkProvider>{children}</ClerkProvider> <Toaster />
       </body>
     </html>
   );
