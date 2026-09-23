@@ -12,26 +12,22 @@ A full-stack dashboard for modelling private-market investment commitments. It r
 - Explore portfolio-level metrics and interactive charts.
 - Generate per-investor fund and cumulative reports.
 - Switch between light and dark themes.
+- Sign in and sign up with Clerk, with dashboard routes protected for authenticated users.
 
 ## Tech Stack
 
 - Next.js, React, and TypeScript
 - Tailwind CSS and shadcn/ui
+- Clerk for authentication
 - MySQL or MariaDB via mysql2
 - Recharts for visualizations
 - Zod for server-side form validation
 
 ## Architecture
 
-The Next.js App Router provides the dashboard routes and React Server Actions. `app/lib/actions.ts` validates and persists customer and product changes. `app/lib/sql.ts` owns database access and report calculations. UI components are organized by dashboard area under `app/ui`.
+The Next.js App Router provides the dashboard routes and React Server Actions. Clerk middleware and the root `ClerkProvider` handle authentication, while `app/lib/actions.ts` requires an authenticated user before validating and persisting customer and product changes. `app/lib/sql.ts` owns database access and report calculations. UI components are organized by dashboard area under `app/ui`.
 
 ## Screenshots
-
-Run the application locally to view the dashboard. Add a screenshot or short GIF here before publishing a deployed portfolio version.
-
-## Live Demo
-
-No public demo is currently deployed. Before deploying, add authentication and use a separate database containing only the fictional seed data included in this repository.
 
 ## Local Setup
 
@@ -42,10 +38,12 @@ pnpm install
 cp .env.example .env.local
 ```
 
-Set `DATABASE_URL` in `.env.local`:
+Set `DATABASE_URL` and your Clerk keys in `.env.local`:
 
 ```bash
 DATABASE_URL=mysql://root:password@127.0.0.1:3306/private_markets_tracker
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
+CLERK_SECRET_KEY=your_secret_key
 ```
 
 Create and seed the local database:
