@@ -1,0 +1,8 @@
+allowBuilds:
+  '@clerk/shared': true
+  core-js: false
+  sharp: false
+
+overrides:
+  nanoid: 3.3.19
+  postcss: 8.5.28
