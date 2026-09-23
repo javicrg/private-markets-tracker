@@ -1,8 +1,4 @@
-import {
-  Show,
-  SignInButton,
-  SignUpButton,
-} from '@clerk/nextjs';
+import { Show, SignInButton, SignUpButton } from '@clerk/nextjs';
 import Link from 'next/link';
 
 export default function Home() {
@@ -16,19 +12,19 @@ export default function Home() {
           Portfolio tracker
         </h1>
         <p className="mt-3 text-muted-foreground">
-          Sign in to manage customers and products.
+          Inicia sesión para gestionar clientes y productos.
         </p>
 
         <Show when="signed-out">
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <SignInButton mode="modal" forceRedirectUrl="/dashboard">
               <button className="rounded-lg bg-brand px-4 py-2.5 font-medium text-brand-foreground transition-opacity hover:opacity-90">
-                Sign in
+                Inicia sesión
               </button>
             </SignInButton>
             <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
               <button className="rounded-lg border border-border px-4 py-2.5 font-medium transition-colors hover:bg-secondary">
-                Sign up
+                Regístrate
               </button>
             </SignUpButton>
           </div>
@@ -39,7 +35,7 @@ export default function Home() {
             href="/dashboard"
             className="mt-8 inline-flex rounded-lg bg-brand px-4 py-2.5 font-medium text-brand-foreground transition-opacity hover:opacity-90"
           >
-            Go to dashboard
+            Ir al dashboard
           </Link>
         </Show>
       </section>

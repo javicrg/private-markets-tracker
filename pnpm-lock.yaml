@@ -12,6 +12,9 @@ importers:
 
   .:
     dependencies:
+      '@clerk/localizations':
+        specifier: ^4.17.1
+        version: 4.17.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/nextjs':
         specifier: ^7.9.4
         version: 7.9.4(next@15.5.24(@types/node@20.14.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -130,6 +133,10 @@ packages:
 
   '@clerk/backend@3.18.1':
     resolution: {integrity: sha512-JjaibgZ9OuYE/tcJUgU7w3c83KdCooHNkt9OBjKznbWUuTXI0lcZQQWyy4ZDw3kB1uszeDfs1WGbsOvVkZA/aQ==}
+    engines: {node: '>=20.9.0'}
+
+  '@clerk/localizations@4.17.1':
+    resolution: {integrity: sha512-XXcjk3TlR6L5B0Z5NndgSOdBUuN0oBfqXje6nk0Gy5jwk8FgReT+tffb024qwDdwEmNBogSH9WVNi5OckQQJng==}
     engines: {node: '>=20.9.0'}
 
   '@clerk/nextjs@7.9.4':
@@ -2914,6 +2921,13 @@ snapshots:
       '@clerk/shared': 4.33.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       standardwebhooks: 1.1.1
       tslib: 2.8.1
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
+  '@clerk/localizations@4.17.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@clerk/shared': 4.33.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - react
       - react-dom
