@@ -29,6 +29,17 @@ The Next.js App Router provides the dashboard routes and React Server Actions. C
 
 ## Screenshots
 
+<img width="1280" height="576" alt="image" src="https://github.com/user-attachments/assets/ddd06a68-1b35-4059-b582-0970c1028424" />
+
+<img width="1280" height="576" alt="image" src="https://github.com/user-attachments/assets/eb4d6fdd-f8a1-44c7-ab09-e5794c830589" />
+
+<img width="1280" height="569" alt="image" src="https://github.com/user-attachments/assets/4355b723-ee52-46dc-932e-3ec0be7f61ae" />
+
+
+<img width="1280" height="576" alt="image" src="https://github.com/user-attachments/assets/85d79fcf-3f57-4c7d-a47a-d820489fd38c" />
+
+
+
 ## Local Setup
 
 Requirements: Node.js 20+, pnpm, and MySQL or MariaDB.
